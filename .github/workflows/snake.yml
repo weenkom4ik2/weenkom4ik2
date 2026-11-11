@@ -1,4 +1,4 @@
-name: Generate Snake
+name: Generate Multi-Style Snake
 
 on:
   schedule:
@@ -13,19 +13,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Generate snake SVG
-        uses: Platane/snk@v3
+      - name: Generate Snake
+        uses: Pro-Bandey/multi-style-snake-action@main
         with:
           github_user_name: ${{ github.repository_owner }}
-          # Оборачиваем каждую строку в одинарные кавычки, чтобы # не считался комментарием
-          outputs: |
-            'dist/github-snake.svg?color_snake=#DDA0DD&color_dots=#f0e6ff,#e6d0ff,#d4b3ff,#b380ff,#8a2be2'
-            'dist/github-snake-dark.svg?color_snake=#DDA0DD&color_dots=#f0e6ff,#e6d0ff,#d4b3ff,#b380ff,#8a2be2&palette=github-dark'
 
       - name: Push to output branch
         uses: crazy-max/ghaction-github-pages@v4
         with:
           target_branch: output
-          build_dir: dist
+          build_dir: dist # Проверьте папку, куда экшен сохраняет файлы, возможно нужно указать другую
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
