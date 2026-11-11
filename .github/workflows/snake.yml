@@ -2,14 +2,14 @@ name: Generate Snake
 
 on:
   schedule:
-    - cron: "0 0 * * *" # Запуск раз в день
-  workflow_dispatch:
+    - cron: "0 0 * * *" # Запуск каждый день в полночь
+  workflow_dispatch: # Позволяет запускать вручную
 
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: write # Важно: дает права на запись в ветку output
     steps:
       - uses: actions/checkout@v4
       
@@ -18,8 +18,8 @@ jobs:
         with:
           github_user_name: ${{ github.repository_owner }}
           outputs: |
-            dist/github-snake.svg?color_snake=#DDA0DD
-            dist/github-snake-dark.svg?color_snake=#DDA0DD&palette=github-dark
+            dist/github-snake.svg?color_snake=#DDA0DD&color_dots=#f0e6ff,#e6d0ff,#d4b3ff,#b380ff,#8a2be2
+            dist/github-snake-dark.svg?color_snake=#DDA0DD&color_dots=#f0e6ff,#e6d0ff,#d4b3ff,#b380ff,#8a2be2&palette=github-dark
 
       - name: Push to output branch
         uses: crazy-max/ghaction-github-pages@v4
