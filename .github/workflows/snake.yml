@@ -17,10 +17,11 @@ jobs:
         uses: Platane/snk@v3
         with:
           github_user_name: ${{ github.repository_owner }}
-          # Убрали # из цветов, чтобы YAML не воспринимал их как комментарий
+          # %23 — это символ #, который безопасен для YAML
+          # Для темной темы берем яркие цвета (светло-сиреневый -> насыщенный фиолетовый)
           outputs: |
-            dist/github-snake.svg?color_snake=DDA0DD&color_dots=f0e6ff,e6d0ff,d4b3ff,b380ff,8a2be2
-            dist/github-snake-dark.svg?color_snake=DDA0DD&color_dots=f0e6ff,e6d0ff,d4b3ff,b380ff,8a2be2&palette=github-dark
+            dist/github-snake.svg?color_snake=%238A2BE2&color_dots=%23f4ecff,%23e2ccff,%23c499ff,%239966ff,%236633cc
+            dist/github-snake-dark.svg?color_snake=%23DDA0DD&color_dots=%23f4ecff,%23e2ccff,%23c499ff,%239966ff,%236633cc&palette=github-dark
 
       - name: Push to output branch
         uses: crazy-max/ghaction-github-pages@v4
